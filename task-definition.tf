@@ -20,20 +20,16 @@ resource "aws_ecs_task_definition" "this" {
 
       secrets = [
         {
-          name = "KONG_CLUSTER_CERT_KEY"
+          name = "KONG_CLUSTER_CERTY"
           valueFrom = var.cluster_cert_secret_arn
+        },
+        {
+          name = "KONG_CLUSTER_CERT_KEY"
+          valueFrom = var.cluster_cert_key_secret_arn
         }
       ]
 
       environment = [
-        {
-          name = "KONG_CLUSTER_CERT"
-          value = var.cluster_cert
-        },
-        # {
-        #   name = "KONG_CLUSTER_CERT_KEY"
-        #   value = var.cluster_cert_key
-        # },
         {
           name = "KONG_CLUSTER_CONTROL_PLANE"
           value = "${var.control_plane_address}:443"
@@ -57,10 +53,6 @@ resource "aws_ecs_task_definition" "this" {
         {
             name ="KONG_CLUSTER_SERVER_NAME"
             value = var.control_plane_address
-        },
-        {
-            name ="KONG_LUA_SSL_TRUSTED_CERTIFICATE"
-            value ="system,${var.cluster_cert}"
         },
         {
             name ="KONG_VITALS"

@@ -1,9 +1,8 @@
 variable "kong_image_repository" {}
 variable "kong_image_tag" {}
 variable "runtime_group" {}
-variable "cluster_cert" {}
 variable "cluster_cert_secret_arn" {}
-# variable "cluster_cert_key" {}
+variable "cluster_cert_key_secret_arn" {}
 variable "vpc_id" {}
 variable "subnets" {}
 variable "ecs_cluster_name" {}
