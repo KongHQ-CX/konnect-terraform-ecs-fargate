@@ -8,6 +8,7 @@ resource "aws_ecs_task_definition" "this" {
     {
       name      = "proxy"
       image     = "${var.kong_image_repository}:${var.kong_image_tag}"
+
       cpu       = 0
       memory    = 1024
       essential = true
@@ -20,7 +21,7 @@ resource "aws_ecs_task_definition" "this" {
 
       secrets = [
         {
-          name = "KONG_CLUSTER_CERTY"
+          name = "KONG_CLUSTER_CERT"
           valueFrom = var.cluster_cert_secret_arn
         },
         {
