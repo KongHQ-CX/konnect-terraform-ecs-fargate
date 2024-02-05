@@ -27,7 +27,8 @@ data "aws_iam_policy_document" "extra_permissions" {
       "secretsmanager:GetSecretValue"
     ]
     resources = [
-      var.cluster_cert_secret_arn
+      var.cluster_cert_secret_arn,
+      var.cluster_cert_key_secret_arn
     ]
   }
 
@@ -38,6 +39,19 @@ data "aws_iam_policy_document" "extra_permissions" {
     resources = [
       "*"
     ]
+  }
+
+  statement {
+    actions = [
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:BatchGetImage",
+      "ecr:DescribeImages",
+      "ecr:GetAuthorizationToken",
+      "ecr:ListImages"
+    ]
+    resources = [
+      "arn:aws:ecr:${var.region}:*:repository/${var.kong_image_repository}/*"
+    ]  
   }
 }
 
