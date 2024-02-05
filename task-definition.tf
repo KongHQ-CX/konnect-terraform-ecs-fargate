@@ -1,6 +1,6 @@
 resource "aws_ecs_task_definition" "this" {
   family = "${var.runtime_group}-gateway"
-  
+
   cpu    = 1024
   memory = 2048
 

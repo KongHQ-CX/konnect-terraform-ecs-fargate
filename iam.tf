@@ -40,6 +40,19 @@ data "aws_iam_policy_document" "extra_permissions" {
       "*"
     ]
   }
+
+  statement {
+    actions = [
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:BatchGetImage",
+      "ecr:DescribeImages",
+      "ecr:GetAuthorizationToken",
+      "ecr:ListImages"
+    ]
+    resources = [
+      "arn:aws:ecr:${var.region}:*:repository/${var.kong_image_repository}/*"
+    ]  
+  }
 }
 
 data "aws_iam_policy_document" "assume_role" {
