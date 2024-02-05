@@ -21,7 +21,7 @@ resource "aws_ecs_task_definition" "this" {
       secrets = [
         {
           name = "KONG_CLUSTER_CERT_KEY"
-          valueFrom = "arn:aws:secretsmanager:region:aws_account_id:secret:secret_name-AbCdEf"
+          valueFrom = var.cluster_cert_secret_arn
         }
       ]
 

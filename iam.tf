@@ -24,11 +24,18 @@ resource "aws_iam_role" "this" {
 data "aws_iam_policy_document" "extra_permissions" {
   statement {
     actions   = [
-      "secretsmanager:GetSecretValue",
+      "secretsmanager:GetSecretValue"
+    ]
+    resources = [
+      var.cluster_cert_secret_arn
+    ]
+  }
+
+  statement {
+    actions   = [
       "logs:CreateLogGroup"
     ]
     resources = [
-      "arn:aws:secretsmanager:::*",
       "*"
     ]
   }
