@@ -33,11 +33,11 @@ resource "aws_ecs_task_definition" "this" {
       environment = [
         {
           name = "KONG_CLUSTER_CONTROL_PLANE"
-          value = "${var.control_plane_address}:443"
+          value = "${local.cluster_hostname}:443"
         },
         {
           name = "KONG_CLUSTER_TELEMETRY_ENDPOINT"
-          value = "${var.telemetry_address}:443"
+          value = "${local.telemetry_hostname}:443"
         },
         {
             name ="KONG_CLUSTER_TELEMETRY_SERVER_NAME"
