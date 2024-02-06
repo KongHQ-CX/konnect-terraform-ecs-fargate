@@ -10,6 +10,7 @@ variable "alb_certificate_arn" {}
 variable "control_plane_address" {}
 variable "telemetry_address" {}
 
+
 variable "region" {
   description = "AWS Region that will host this stack"
   type = string
