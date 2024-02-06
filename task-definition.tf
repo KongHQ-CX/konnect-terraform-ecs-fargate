@@ -22,11 +22,11 @@ resource "aws_ecs_task_definition" "this" {
       secrets = [
         {
           name = "KONG_CLUSTER_CERT"
-          valueFrom = var.cluster_cert_secret_arn
+          valueFrom = var.cluster_cert_secret_arn != null ? var.cluster_cert_secret_arn : aws_secretsmanager_secret_version.cluster_cert[0].arn
         },
         {
           name = "KONG_CLUSTER_CERT_KEY"
-          valueFrom = var.cluster_cert_key_secret_arn
+          valueFrom = var.cluster_cert_key_secret_arn != null ? var.cluster_cert_key_secret_arn : aws_secretsmanager_secret_version.cluster_key[0].arn
         }
       ]
 

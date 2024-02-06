@@ -27,8 +27,8 @@ data "aws_iam_policy_document" "extra_permissions" {
       "secretsmanager:GetSecretValue"
     ]
     resources = [
-      var.cluster_cert_secret_arn,
-      var.cluster_cert_key_secret_arn
+      var.cluster_cert_secret_arn != null ? var.cluster_cert_secret_arn : aws_secretsmanager_secret_version.cluster_cert[0].arn,
+      var.cluster_cert_key_secret_arn != null ? var.cluster_cert_key_secret_arn : aws_secretsmanager_secret_version.cluster_key[0].arn,
     ]
   }
 

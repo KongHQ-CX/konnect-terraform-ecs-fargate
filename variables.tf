@@ -1,15 +1,24 @@
 variable "kong_image_repository" {}
 variable "kong_image_tag" {}
 variable "runtime_group" {}
-variable "cluster_cert_secret_arn" {}
-variable "cluster_cert_key_secret_arn" {}
+variable "cluster_cert_secret_arn" {
+  default = null
+}
+variable "cluster_cert_key_secret_arn" {
+  default = null
+}
 variable "vpc_id" {}
 variable "subnets" {}
 variable "ecs_cluster_name" {}
 variable "alb_certificate_arn" {}
 variable "control_plane_address" {}
 variable "telemetry_address" {}
-
+variable "control_plane_id" {
+  default = null
+}
+variable "konnect_pat" {
+  default = null
+}
 
 variable "region" {
   description = "AWS Region that will host this stack"
