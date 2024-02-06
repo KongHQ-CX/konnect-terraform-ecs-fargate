@@ -40,8 +40,12 @@ resource "aws_ecs_task_definition" "this" {
           value = "${local.telemetry_hostname}:443"
         },
         {
+            name ="KONG_CLUSTER_SERVER_NAME"
+            value = local.cluster_hostname
+        },
+        {
             name ="KONG_CLUSTER_TELEMETRY_SERVER_NAME"
-            value = var.telemetry_address
+            value = local.telemetry_hostname
         },
         {
             name ="KONG_KONNECT_MODE"
@@ -50,10 +54,6 @@ resource "aws_ecs_task_definition" "this" {
         {
             name ="KONG_PROXY_LISTEN"
             value ="0.0.0.0:8000,0.0.0.0:8443 http2 ssl"
-        },
-        {
-            name ="KONG_CLUSTER_SERVER_NAME"
-            value = var.control_plane_address
         },
         {
             name ="KONG_VITALS"
